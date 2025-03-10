@@ -2,7 +2,7 @@
 
 /*
 1. let (재할당 가능), const (재할당 불가능)
-2. 화살표 함수 (익명함수) : ()=> {}
+2. 화살표 함수 (익명함수) : () => {}
 3. 구조 분해/할당 (Destructuring)
 4. 스프레드 연산자 (...)
 5. map(), filter(), find()
@@ -52,13 +52,13 @@ export function MyComp(){
     console.log(mapResult); // 2, 4, 6
 
     // filter는 배열의 값 중 조건에 부합하는 값을 반환해서 새로운 배열을 만든다.
-    const filterResult = numbers.filter(num=> num% 2 === 0); 
+    const filterResult = numbers.filter(num=> num % 2 === 0); 
     console.log(filterResult); // 2
 
     // find는 조건에 맞는 첫 번째 요소를 반환한다.
     const users = [
         {id:1, name :"Kim"},
-        {id:2, name : "Lee"},
+        {id:2, name :"Lee"},
     ];
     const findResult = users.find((user)=> user.id === 2);
     console.log(findResult);
