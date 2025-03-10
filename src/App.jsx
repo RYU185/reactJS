@@ -1,5 +1,11 @@
+import { MyComp } from "./MyComp"
+
 function App() {
-  return <></>
+  return (
+    <div>
+      <MyComp /> 
+    </div>
+  );
 }
 // JSX의 첫번째 규칙!
 // empty태그는 태그가 아니지만
@@ -9,4 +15,6 @@ function App() {
 
 // return이라는 키워드는 오른쪽의 한줄을 리턴하도록 되어있다.
 // 그러므로 return 하고 바로 오른쪽에 괄호나 태그의 시작이 들어가도록 한다.
+// <MyComp /> 
+
 export default App
