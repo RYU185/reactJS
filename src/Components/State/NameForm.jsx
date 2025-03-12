@@ -11,12 +11,15 @@ const Container = styled.div`
     align-items: center;
 `;
 
+// const 이름을 쓰되 = styled.(원래의 태그명. ex)div, header, section...)
+
 const Box = styled.section`
     width: 400px;
     height: 400px;
     padding: 40px;
-    background-color: ${(props)=>props.color}; //css에 변수를 적용할 수 있음 
-                                                // props 문법
+    background-color: ${(props)=>props.color}; 
+    //css에 변수를 적용할 수 있음 
+    // props 문법
     color: white;
     border-radius: 10px;
     & input { // 안에 있는 자식 요소들도 & 를 사용하여 css를 줄수있음
@@ -38,6 +41,10 @@ export function NameForm (){
     const handleChange = (e)=>{
         setName(e.target.value);
     };
+
+    // function handleChange(e){
+    //     setName(e.target.value);
+    // }
     
     // 문제 인식: 어떤컴포넌트에게 어떤 컴포넌트가 정보를 줘야할때 매개변수를 실어줄 수 있는 곳이 없으니까
     // 태그 안에, 즉 props에 속성을 던져줌
@@ -47,7 +54,8 @@ export function NameForm (){
     };
 
     return <>
-        <Container>
+        <Container> 
+            {/* className을 쓰는 대신 태그의 이름 자체를 정한다. */}
             <Box color={color}>
                 <h2>이름 입력</h2>
                 <input type="text" 
