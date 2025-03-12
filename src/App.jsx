@@ -1,9 +1,14 @@
+import { CounterWithoutState } from "./Components/State/CounterWithoutState";
 import { MyComp } from "./MyComp"
+import { CounterWithState } from "./Components/State/CounterWithState";
+import { NameForm } from "./Components/State/NameForm";
 
 function App() {
   return (
     <div>
-      <MyComp /> 
+      <CounterWithoutState />
+      <CounterWithState /> 
+      <NameForm />
     </div>
   );
 }
@@ -17,4 +22,4 @@ function App() {
 // 그러므로 return 하고 바로 오른쪽에 괄호나 태그의 시작이 들어가도록 한다.
 // <MyComp /> 
 
-export default App
+export default App;
