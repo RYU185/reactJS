@@ -4,6 +4,7 @@ import { use, useState } from "react" // useState를 import하고
 
 export function CounterWithState(){
     const [count, setCount] = useState(0); // 기본적으로 로직의 count와 화면에 보여줄 setCount
+    // 구조 분해/할당
     // const [상태변수(X), 세터함수(setX)] = useState(0); 
     // 0은 상태변수 X의 초기값
     // 상태변수나 세터함수는 우리가 만든게 아니라 참조하여 가져와 이름만 붙인 것뿐.
