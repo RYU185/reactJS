@@ -1,14 +1,32 @@
-import { CounterWithoutState } from "./Components/State/CounterWithoutState";
+import { createGlobalStyle } from "styled-components";
+import { CounterWithoutState } from "./Components/1_State/CounterWithoutState";
 import { MyComp } from "./MyComp"
-import { CounterWithState } from "./Components/State/CounterWithState";
-import { NameForm } from "./Components/State/NameForm";
+import { CounterWithState } from "./Components/1_State/CounterWithState";
+import { NameForm } from "./Components/1_State/NameForm";
+import { Example_1 } from "./Components/2_Effect/Example_1";
+import { Example_2 } from "./Components/2_Effect/Example_2";
+import Example_3 from "./Components/2_Effect/Example_3";
+import Example_4 from "./Components/2_Effect/Example_4";
+import Button from "./Components/3_Props/Button";
+import { Menu } from "./Components/3_Props/Menu";
 
+const GlobalStyle = createGlobalStyle`
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins;
+  }
+`
 function App() {
   return (
     <div>
-      <CounterWithoutState />
-      <CounterWithState /> 
-      <NameForm />
+      <GlobalStyle />
+      <Example_1 />
+      <Example_2 />
+      <Example_3 />
+      <Example_4 />
+      <Menu />
     </div>
   );
 }
