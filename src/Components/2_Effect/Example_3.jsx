@@ -1,26 +1,4 @@
-// import React, { useEffect, useState } from "react";
-
-// ex. 게시판
-// const Example_3 = () =>{
-//     const [data, setData] = useState(null);
-//     const [loading, setLoading] = useState(true);
-
-//     useEffect(()=>{
-//         sendAPI().then((response)=>{
-//             console.log("서버로부터 응답 도착");
-//             setData(response);
-//             setLoading(false);
-//         });
-//     },[]);
-
-//     return<div>
-//         {
-//             loading ? <p>로딩중....</p> : <p>데이터: {data?.title}</p>
-//         }
-//     </div>
-// }
-
-    import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
     
     const Example_3 = () => {
         const [data, setData] = useState(null);
