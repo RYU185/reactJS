@@ -1,24 +1,47 @@
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
 
 // ex. 게시판
-const Example_3 = () =>{
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
+// const Example_3 = () =>{
+//     const [data, setData] = useState(null);
+//     const [loading, setLoading] = useState(true);
 
-    useEffect(()=>{
-        sendAPI().then((response)=>{
-            console.log("서버로부터 응답 도착");
-            setData(response);
-            setLoading(false);
-        });
-    },[]);
+//     useEffect(()=>{
+//         sendAPI().then((response)=>{
+//             console.log("서버로부터 응답 도착");
+//             setData(response);
+//             setLoading(false);
+//         });
+//     },[]);
 
-    return<div>
-        {
-            loading ? <p>로딩중....</p> : <p>데이터: {data?.title}</p>
-        }
-    </div>
-}
+//     return<div>
+//         {
+//             loading ? <p>로딩중....</p> : <p>데이터: {data?.title}</p>
+//         }
+//     </div>
+// }
+
+    import React, { useEffect, useState } from 'react'
+    
+    const Example_3 = () => {
+        const [data, setData] = useState(null);
+        const [loading, setLoading] = useState(true);
+
+        useEffect(()=>{
+            sendAPI().then((response)=>{
+                console.log("서버로부터 응답 도착");
+                setData(response);
+                setLoading(false);
+            });
+        },[]);
+        return (
+            <div>
+                {loading ? <p>로딩중...</p> : <p>데이터: {data?.title}</p>}
+            </div>
+        )
+    }
+
+
+
 
 const sendAPI = () => {
     // ajax 또는  axios를 이용하여 rest api 코드를 작성하는 부분
