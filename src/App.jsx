@@ -9,6 +9,8 @@ import Example_3 from "./Components/2_Effect/Example_3";
 import Example_4 from "./Components/2_Effect/Example_4";
 import Button from "./Components/3_Props/Button";
 import { Menu } from "./Components/3_Props/Menu";
+import BasicRouter from "./Components/4_Router/BasicRouter";
+import ReactRouter from "./Components/4_Router/ReactRouter";
 
 const GlobalStyle = createGlobalStyle`
   *{
@@ -17,16 +19,17 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: Poppins;
   }
+  a{
+    text-decoration: none;
+    color: inherit;
+    
+  }
 `
 function App() {
   return (
     <div>
       <GlobalStyle />
-      <Example_1 />
-      <Example_2 />
-      <Example_3 />
-      <Example_4 />
-      <Menu />
+      <ReactRouter />
     </div>
   );
 }

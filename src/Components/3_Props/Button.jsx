@@ -19,9 +19,9 @@ const Box = styled.div`
     }
 `
 // 구조분해할당
-const Button = ({name, color, value}) => {
+const Button = ({name, onClick}) => {
     return (
-        <Box>
+        <Box onClick={onClick}>
             <p>{name}</p>
         </Box>
     );
