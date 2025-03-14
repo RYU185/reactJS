@@ -18,9 +18,6 @@ import React, { useEffect, useState } from 'react'
         )
     }
 
-
-
-
 const sendAPI = () => {
     // ajax 또는  axios를 이용하여 rest api 코드를 작성하는 부분
     // 지금은 3초뒤에 데이터를 리턴하는 코드로 대신함
