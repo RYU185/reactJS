@@ -11,6 +11,7 @@ import Button from "./Components/3_Props/Button";
 import { Menu } from "./Components/3_Props/Menu";
 import BasicRouter from "./Components/4_Router/BasicRouter";
 import ReactRouter from "./Components/4_Router/ReactRouter";
+import SendAPI from "./Components/2_Effect/SendAPI";
 
 const GlobalStyle = createGlobalStyle`
   *{
@@ -22,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
   a{
     text-decoration: none;
     color: inherit;
-    
+
   }
 `
 function App() {
@@ -30,6 +31,7 @@ function App() {
     <div>
       <GlobalStyle />
       <ReactRouter />
+      <SendAPI />
     </div>
   );
 }
@@ -41,6 +43,6 @@ function App() {
 
 // return이라는 키워드는 오른쪽의 한줄을 리턴하도록 되어있다.
 // 그러므로 return 하고 바로 오른쪽에 괄호나 태그의 시작이 들어가도록 한다.
-// <MyComp /> 
+// <MyComp />
 
 export default App;

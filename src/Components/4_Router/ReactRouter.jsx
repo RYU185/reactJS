@@ -27,15 +27,26 @@ const ReactRouter = () => {
     <div>
       <BrowserRouter>
         <Menu>
-          <Link to="/"><Button name="HOME" /></Link>
-          <Link to="/about"><Button name="ABOUT" /></Link>
-          <Link to="/contact"><Button name="CONTACT" /></Link>
+          <Link to="/">
+            <Button name="HOME" />
+          </Link>
+          <Link to="/about">
+            <Button name="ABOUT" />
+          </Link>
+          <Link to="/about/1000">
+            <Button name="ABOUT ID" />
+          </Link>
+          <Link to="/contact">
+            <Button name="CONTACT" />
+          </Link>
         </Menu>
         <Body>
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/home" element={<Home />}></Route>
-            <Route path="/about" element={<About />}></Route>
+            <Route path="/about" element={<About />}>
+              <Route path=":id" element={<About />} />
+            </Route>
             <Route path="/contact" element={<Contact />}></Route>
           </Routes>
         </Body>
