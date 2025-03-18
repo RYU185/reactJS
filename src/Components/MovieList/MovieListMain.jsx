@@ -37,9 +37,7 @@ const ContentBox = styled.div`
   width: 100%;
   margin-top: 30px;
 `;
-const Footer= styled.div``;
-
-
+const Footer = styled.div``;
 
 function MovieListMain() {
   return (
@@ -53,18 +51,18 @@ function MovieListMain() {
             <ContentBox>
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/movie" element={<MovieWrapper />} >
-                  <Route index element= {<MovieList />} /> 
+                <Route path="/movie" element={<MovieWrapper />}>
+                  <Route index element={<MovieList />} />
                   {/* index : "부모의 주소가 같으면", 여기서는 path="/movie"와 같은 뜻 */}
                   {/* /movie에서는 movieWrapper와 MovieList가 떠있고
                   /movie:id 있을때는 MovieWrapper와 MovieDetail이 같이 떠야함 */}
                   {/* 부모 컴포먼트에서 "Outlet" 사용 */}
                   <Route path=":id" element={<MovieDetail />} />
-                </Route>  
+                </Route>
                 <Route path="/search" element={<Search />} />
                 <Route path="/mypage" element={<Mypage />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/*" element={<Error />} /> 
+                <Route path="/*" element={<Error />} />
                 {/*  *:"위에 있는 url이름이 아니면" 이라는 뜻 */}
               </Routes>
             </ContentBox>

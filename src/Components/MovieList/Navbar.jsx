@@ -16,9 +16,9 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   color: white;
   padding: 5px;
-  transition: background-color 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   &:hover{
-    background-color: #0e63ff;
+    background-color: #ff69b4;
   }
 `
 
