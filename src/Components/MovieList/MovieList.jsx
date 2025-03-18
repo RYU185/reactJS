@@ -45,14 +45,15 @@ const Img = styled.img`
 `;
 const Text = styled.div`
   color: #333;
+  overflow-wrap: break-word;
+  word-break: break-all;
+  
+`;
   // text는 항상 주의해야한다
   // 분명히 Card는 Grid방식으로 1/3로 나눠놨는데
   // text가 긴 word라면 뚫고나가거나 카드 범위를 강제로 넓힐 가능성이 있다.
-  overflow-wrap: break-word;
   /* break-word만 쓴다면 잘리는 부분이 있는 긴 단어를 아예 줄바꿈 */
-  word-break: break-all;
   // 글자가 길다면 잘라서 줄바꿈하라.
-`;
 
 function MovieList() {
   const [data, setData] = useState(null);
