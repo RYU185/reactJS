@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { categories } from "./api";
+import { categories, getGenreListMovie, getGenreName } from "./api";
 
 const Tab = styled.div`
   display: flex;
@@ -62,6 +62,9 @@ function MovieList() {
 
   useEffect(() => {
     getMovies(0);
+    // 문제 발견: 둘 모두 비동기함수
+    // 장르를 가져오는 응답은 딜레이되고
+    // getMovies만 업데이트될 확률
   }, []);
   // 반드시! 두번째 변수에 빈 배열 혹은 배열에 변수!
 
@@ -70,6 +73,14 @@ function MovieList() {
   // 2. try-catch 구문을 사용하는 것을 추천함
   async function getMovies(index) {
     try {
+      // 장르 리스트 요청
+      if (!JSON.parse(sessionStorage.getItem("GenreList"))) {
+        let response = await getGenreListMovie(); // async함수 안에 있어야함
+        sessionStorage.setItem("GenreList", JSON.stringify(response.data));
+      }
+      // 이게 완료되면 무비 리스트 요청하는 함수로 이동
+
+      // 무비 리스트 요청
       let response = await categories[index].func(); // api.js 에서 import
       console.log(response.data);
       setSelectedCat(index);
@@ -79,6 +90,7 @@ function MovieList() {
     } catch (error) {
       console.log(error);
       // 400, 404, 500 기타 등등
+      alert("네트워크 오류로 정상적인 동작이 불가능합니다.");
     }
     // 만약 promise then을 쓴다면
     // then 안에 then, then 안에 then 안에 then......
@@ -96,7 +108,7 @@ function MovieList() {
           <Button
             key={i}
             onClick={() => getMovies(i)}
-            className={i == selectedCat ? "selected" : ""} 
+            className={i == selectedCat ? "selected" : ""}
             // i가 내가 선택한 카테고리라면 selected라는 클래스를 추가하라.
             // selected라는 클래스가 붙으면 css에서 background-color를 바꿈
           >
@@ -112,7 +124,12 @@ function MovieList() {
             <Card key={movie.id}>
               <Img src={IMG_PATH + movie.poster_path} />
               <Text>타이틀: {movie.title}</Text>
-              <Text>장르: {movie.genre_ids}</Text>
+              <Text>장르: {getGenreName(movie.genre_ids)}</Text>
+              {/* 장르가 숫자로 나오는 문제 해결
+              1. 컴포넌트를 처음 로드할때, 장르 리스트 요청
+              2. 장르 리스트 저장
+              3. 변환함수(숫자를 매개변수로 던져주면 Text로 return) 작성
+              4.  */}
               <hr />
               <Text>{movie.overview}</Text>
             </Card>
