@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { categories, getGenreListMovie, getGenreName } from "./api";
+import { useNavigate } from "react-router-dom";
 
 const Tab = styled.div`
   display: flex;
@@ -9,7 +10,7 @@ const Tab = styled.div`
   gap: 10px;
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   width: 130px;
   height: 40px;
   background-color: dodgerblue;
@@ -27,39 +28,40 @@ const Button = styled.button`
     background-color: #32dc32;
   }
 `;
-const Container = styled.div`
+export const Container = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 `;
-const Card = styled.div`
+export const Card = styled.div`
   width: 100%;
   border: 1px solid dodgerblue;
   cursor: pointer;
   padding: 0.625rem;
 `;
-const Img = styled.img`
+export const Img = styled.img`
   width: 100%;
   object-fit: cover;
 `;
-const Text = styled.div`
+export const Text = styled.div`
   color: #333;
   overflow-wrap: break-word;
   word-break: break-all;
-  
 `;
-  // text는 항상 주의해야한다
-  // 분명히 Card는 Grid방식으로 1/3로 나눠놨는데
-  // text가 긴 word라면 뚫고나가거나 카드 범위를 강제로 넓힐 가능성이 있다.
-  /* break-word만 쓴다면 잘리는 부분이 있는 긴 단어를 아예 줄바꿈 */
-  // 글자가 길다면 잘라서 줄바꿈하라.
+// text는 항상 주의해야한다
+// 분명히 Card는 Grid방식으로 1/3로 나눠놨는데
+// text가 긴 word라면 뚫고나가거나 카드 범위를 강제로 넓힐 가능성이 있다.
+/* break-word만 쓴다면 잘리는 부분이 있는 긴 단어를 아예 줄바꿈 */
+// 글자가 길다면 잘라서 줄바꿈하라.
 
 function MovieList() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedCat, setSelectedCat] = useState(0);
+  const [genreList, setGenreList] = useState([]);
   const IMG_PATH = "https://image.tmdb.org/t/p/w400/";
+  const navigate = useNavigate(); // url 수정 함수 03.19
 
   useEffect(() => {
     getMovies(0);
@@ -74,15 +76,25 @@ function MovieList() {
   // 2. try-catch 구문을 사용하는 것을 추천함
   async function getMovies(index) {
     try {
-      // 장르 리스트 요청
-      if (!JSON.parse(sessionStorage.getItem("GenreList"))) {
-        let response = await getGenreListMovie(); // async함수 안에 있어야함
-        sessionStorage.setItem("GenreList", JSON.stringify(response.data));
+      // 장르리스트가 상태에 없을 경우 처리
+      if (genreList.length === 0) {
+        const storedGenreList = JSON.parse(sessionStorage.getItem("GenreList"));
+        if (storedGenreList && storedGenreList.length > 0) {
+          // 세션스토리지에 값이 있으면 상태 업데이트
+          console.log("세션스토리지에 값이 있음");
+          setGenreList(storedGenreList);
+        } else {
+          // 세션스토리지에도 없으면 API 호출
+          console.log("세션스토리지에도 없어서 API 호출");
+          const response = await getGenreListMovie(); // 200 OK
+          setGenreList(response.data.genres);
+          sessionStorage.setItem("GenreList", JSON.stringify(response.data.genres));
+        }
       }
       // 이게 완료되면 무비 리스트 요청하는 함수로 이동
 
-      // 무비 리스트 요청
-      let response = await categories[index].func(); // api.js 에서 import
+      // 무비리스트 요청
+      let response = await categories[index].func(); // 200 OK
       console.log(response.data);
       setSelectedCat(index);
       setData(response.data);
@@ -122,10 +134,11 @@ function MovieList() {
           <p>로딩중...</p>
         ) : (
           data.results.map((movie) => (
-            <Card key={movie.id}>
-              <Img src={IMG_PATH + movie.poster_path} />
-              <Text>타이틀: {movie.title}</Text>
-              <Text>장르: {getGenreName(movie.genre_ids)}</Text>
+            <Card key={movie.id} onClick={() => navigate(`${movie.id}`)}>
+              {/* 문자열로 줘야함. 왜?  */}
+              <Img src={IMG_PATH + movie.poster_path}></Img>
+              <Text>타이틀 : {movie.title}</Text>
+              <Text>장르 : {getGenreName(genreList, movie.genre_ids)}</Text>
               {/* 장르가 숫자로 나오는 문제 해결
               1. 컴포넌트를 처음 로드할때, 장르 리스트 요청
               2. 장르 리스트 저장

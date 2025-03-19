@@ -10,6 +10,8 @@ const header = {
   },
 };
 
+export const IMG_PATH = "https://image.tmdb.org/t/p/w400/";
+
 export const categories = [
   {
     category: "Now Playing",
@@ -49,15 +51,28 @@ export function getMoviesUpcoming() {
   return axios.get("https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1", header);
 }
 
+export function getMovieDetailById(id) {
+  return axios.get(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, header);
+  // ``으로 바꾸고 우리가 던질 매개변수를 문자열처리(${})
+}
+
+export function getMovieCreditById(id) {
+  return axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`, header);
+}
+
+export function searchMoviesByKeyword(Keyword) {
+  return axios.get(`https://api.themoviedb.org/3/search/movie?query=${Keyword}&include_adult=false&language=en-US&page=1`, header);
+}
+
+
 // ex. [12, 35 ,80]와 같이 숫자의 배열을 매개변수로 전달하면
 // "Adventure", "Drama", "Crime"과 같이 장르명을 문자열로 리턴하는 함수
-export function getGenreName(idList) {
-  const genreList = JSON.parse(sessionStorage.getItem("GenreList"));
+export function getGenreName(genreList, idList) {
   return (
     idList
       .map((id) => {
-        const temp = genreList.genres.find((g) => g.id === id);
-        return temp ? temp.name : "";
+        const found = genreList.find((genre) => genre.id == id);
+        return found ? found.name : "";
       })
       .filter((name) => name)
       // filter: name이 있으면 보내주고 없으면 null로 체크하겠다
