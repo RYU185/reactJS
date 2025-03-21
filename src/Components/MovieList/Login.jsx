@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import { IconEmail, IconPassword } from "./Icons";
+import { IconEmail, IconPassword } from "./Icons"
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 

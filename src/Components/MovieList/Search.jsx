@@ -1,4 +1,3 @@
-
 import React, { use, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Button } from "./MovieList";
@@ -7,13 +6,8 @@ import { Card } from "./MovieList";
 import { Img } from "./MovieList";
 import { Text } from "./MovieList";
 import { useLocation, useNavigate } from "react-router-dom";
-import {
-  getGenreName,
-  IMG_PATH,
-  searchMoviesByKeyword,
-  getGenreListMovie,
-} from "./api";
-import noExist from "./img/no_exist.jpg";
+import { getGenreName, IMG_PATH, searchMoviesByKeyword, getGenreListMovie } from "./api";
+import noExist from "./image/no_exist.jpg";
 
 const SearchBox = styled.div`
   width: 100%;
@@ -91,15 +85,8 @@ function Search() {
         {loading
           ? "대기중..."
           : data.results.map((movie) => (
-              <Card
-                key={movie.id}
-                onClick={() => navigate(`/movie/${movie.id}`)}
-              >
-                <Img
-                  src={
-                    movie.poster_path ? IMG_PATH + movie.poster_path : noExist
-                  }
-                ></Img>
+              <Card key={movie.id} onClick={() => navigate(`/movie/${movie.id}`)}>
+                <Img src={movie.poster_path ? IMG_PATH + movie.poster_path : noExist}></Img>
                 <Text>타이틀 : {movie.title}</Text>
                 <Text>장르 : {getGenreName(genreList, movie.genre_ids)}</Text>
                 <hr />
