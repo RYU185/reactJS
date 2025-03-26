@@ -13,6 +13,7 @@ import BasicRouter from "./Components/4_Router/BasicRouter";
 import ReactRouter from "./Components/4_Router/ReactRouter";
 import SendAPI from "./Components/2_Effect/SendAPI";
 import MovieListMain from "./Components/MovieList/MovieListMain";
+import ChatRoomMain from "./Components/ChatRoom/ChatRoomMain";
 
 const GlobalStyle = createGlobalStyle`
   *{
@@ -31,7 +32,8 @@ function App() {
   return (
     <div>
       <GlobalStyle />
-      <MovieListMain />
+      <ChatRoomMain />
+      
     </div>
   );
 }
